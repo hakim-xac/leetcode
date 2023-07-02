@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 
-set(project_name isPalindrome)
+set(project_name MedianOfTwoSortedArrays)
 set(path_include "../../../googletest-main/googletest/include")
 set(path_gtest "../../../googletest-main")
 

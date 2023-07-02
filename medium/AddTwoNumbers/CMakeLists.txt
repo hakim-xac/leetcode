@@ -1,19 +1,23 @@
 cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 
-project(AddTwoNumbers)
+set(project_name AddTwoNumbers)
+set(path_include "../../../googletest-main/googletest/include")
+set(path_gtest "../../../googletest-main")
 
-add_executable(AddTwoNumbers main.cpp)
+project(${project_name})
 
-target_include_directories(AddTwoNumbers PUBLIC "include")
-target_link_directories(AddTwoNumbers PUBLIC "lib/Debug/")
-target_link_libraries(AddTwoNumbers PUBLIC "lib/Debug/gmock")
-target_link_libraries(AddTwoNumbers PUBLIC "lib/Debug/gtest")
-target_link_libraries(AddTwoNumbers PUBLIC "lib/Debug/gtest_main")
-target_link_libraries(AddTwoNumbers PUBLIC "lib/Debug/gmock_main")
+add_subdirectory(${path_gtest} googletest)
 
-add_subdirectory(../../../googletest-main googletest)
+add_executable(${project_name} main.cpp)
 
-set_target_properties(AddTwoNumbers PROPERTIES
+target_include_directories(${project_name} PUBLIC ${path_include})
+
+
+find_package(gtest REQUIRED)
+
+target_link_libraries(${project_name} PRIVATE gtest)
+
+set_target_properties(${project_name} PROPERTIES
     CXX_STANDARD 20
     CXX_STANDARD_REQUIRED YES
     CXX_EXTENSIONS NO

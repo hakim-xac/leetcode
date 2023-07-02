@@ -1,22 +1,25 @@
 cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 
-project(RomanToInteger)
+set(project_name RomanToInteger)
+set(path_include "../../../googletest-main/googletest/include")
+set(path_gtest "../../../googletest-main")
 
-add_executable(RomanToInteger main.cpp)
+project(${project_name})
 
-target_include_directories(RomanToInteger PUBLIC "include")
-target_link_directories(RomanToInteger PUBLIC "lib/Release/")
-target_link_libraries(RomanToInteger PUBLIC "lib/Release/gmock")
-target_link_libraries(RomanToInteger PUBLIC "lib/Release/gtest")
-target_link_libraries(RomanToInteger PUBLIC "lib/Release/gtest_main")
-target_link_libraries(RomanToInteger PUBLIC "lib/Release/gmock_main")
+add_subdirectory(${path_gtest} googletest)
 
-add_subdirectory(../../../googletest-main googletest)
+add_executable(${project_name} main.cpp)
 
-set_target_properties(RomanToInteger PROPERTIES
+target_include_directories(${project_name} PUBLIC ${path_include})
+
+
+find_package(gtest REQUIRED)
+
+target_link_libraries(${project_name} PRIVATE gtest)
+
+set_target_properties(${project_name} PROPERTIES
     CXX_STANDARD 20
     CXX_STANDARD_REQUIRED YES
     CXX_EXTENSIONS NO
 )
 
-					  
